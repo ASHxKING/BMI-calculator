@@ -2,11 +2,17 @@ import express from "express"
 import bodyParser from "body-parser"
 import { fileURLToPath } from 'url';
 import path from 'path';
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+
+// Specify the directory where your views are located
+app.set('views', `${__dirname}/views`);
+
 // Get the directory name
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/", function(req,res){
-  res.sendFile(__dirname + "/public/bmiCalculator.html")
+  res.render("bmiCalculator")
 })
 
 app.post("/" , function(req,res){
@@ -24,6 +30,8 @@ app.post("/" , function(req,res){
   var height = Number(req.body.height);
 
   var BMI = weight/(height*height);
+
+  // res.render("bmiCalculator" , {bmihtml :"BMI"})
 
   if (BMI <= 18.4){
     res.send("You are Underweight and your BMI is "+BMI)
