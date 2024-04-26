@@ -1,0 +1,28 @@
+<%- include("header.ejs") %>
+<div>
+  <p id="intro">
+    Calculate your BMI (body mass index) by using the form below. Enter your
+    weight and height and click the Calculate button to display your BMI result.
+  </p>
+  <form action="/" method="post" name="bmiform">
+    <fieldset>
+      <legend>Height and Weight</legend>
+      <label for="pounds">Weight (Kg):</label>
+      <input type="text" name="weight" id="pounds" value="<%= weightvalue %>" placeholder="Kilograms"/>
+      <br />
+      <label for="inches">Height (M):</label>
+      <input type="text" name="height" id="inches" value="<%= heightvalue %>" placeholder="Meters"/>
+      <br />
+      <button type="submit" name="calculate" value="Calculate your BMI">
+        Calculate your BMI
+      </button>
+    </fieldset>
+    <fieldset>
+      <legend>BMI</legend>
+      <label for="bmi" id="bmi_label">Your calculated BMI is:</label>
+      <input type="text" name="bmi" id="bmi" value="<%= bmivalue %>" readonly="readonly" />
+      <label for="bmi" id="bmi_label"><%= bmitext %></label>
+    </fieldset>
+  </form>
+</div>
+<%- include("footer.ejs") %>
